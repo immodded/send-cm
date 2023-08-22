@@ -1,0 +1,420 @@
+FORMAT: 1A
+HOST: https://send.cm
+
+
+# Info
+><b>Where can I find my API key?</b>
+>1. https://send.cm/?op=my_account
+>2. Upload settings
+
+# Group Account
+
+My Account functions
+
+## Account Info [/api/account/info?key={key}]
+
+### Account Info [GET /api/account/info?key={key}]
+
++ Parameters
+    + key: 1l5ftrilhllgwx2bo (string) - API key
+
++ Response 200 (application/json)
+
+        {
+            "msg": "OK",
+            "server_time": "2017-08-11 04:30:07",
+            "status": 200,
+            "result": {
+                "email": "myemail@gmail.com",
+                "balance": "0.00000",
+                "storage_used" :"24186265",
+                "storage_left": 128824832615,
+                "premium_expire": "2015-10-24 21:00:00
+            }
+        }
+
+## Account Stats [/api/account/stats?key={key}]
+
+### Account Stats [GET /api/account/stats?key={key}&last={last}]
+
++ Parameters
+    + key: 1l5ftrilhllgwx2bo (string) - API key
+    + last (number,optional) - show stats for last X days
+        + Default: `7`
+
++ Response 200 (application/json)
+
+        {
+            "msg": "OK",
+            "server_time": "2017-08-11 04:30:07",
+            "status": 200,
+            "result": [
+                {
+                    "downloads":"0",
+                    "profit_views":"0.00000",
+                    "views_adb":"1",
+                    "sales":"0",
+                    "profit_sales":"0.00000",
+                    "profit_refs":"0.00000",
+                    "profit_site":"0.00000",
+                    "views":"0",
+                    "refs":"0",
+                    "day":"2017-09-12",
+                    "profit_total":"0.00000",
+                    "views_prem":"0"
+                }
+            ]
+        }
+
+
+
+# Group Upload
+
+## Upload Server [/api/upload/server]
+
+Shortest sample video upload form:
+
+\<form enctype="multipart/form-data" action="https://cloud.send.cm/upload/01" method="post"\><br>
+\<input name="sess_id" value="3qr5wkukoy31pd1g"\><br>
+\<input name="file" type="file"\><br>
+\</form\>
+    
+### Get next Upload Server URL [GET /api/upload/server?key={key}]
+
++ Parameters
+    + key: 1l5ftrilhllgwx2bo (string) - API key
+
++ Response 200 (application/json)
+
+        {
+            "msg": "OK",
+            "server_time": "2017-08-11 04:29:54",
+            "status": 200,
+            "result": "https://cloud.send.cm/upload/01"
+        }
+
+### Get next Upload Server URL without account [GET /api/upload/server]
+
+
++ Response 200 (application/json)
+
+        {
+            "msg": "OK",
+            "server_time": "2017-08-11 04:29:54",
+            "status": 200,
+            "result": "https://cloud.send.cm/upload/01"
+        }
+        
+## Upload remote URL [/api/upload/url]
+
+
+### Upload URL [GET /api/upload/url?key={key}&url={url}]
+
++ Parameters
+    + key: 1l5ftrilhllgwx2bo (string) - API key
+  + url: https://mirror.nl.leaseweb.net/speedtest/10mb.bin - 
+
++ Response 200 (application/json)
+
+        {
+            "msg": "OK",
+            "server_time": "2021-10-24 11:07:29",
+            "status": 200,
+            "result":{"filecode":"swcn8cyvm75d"}}
+        
+
+### Upload URL without account [GET /api/upload/url?url={url}]
+
++ Parameters
+  + url: https://mirror.nl.leaseweb.net/speedtest/10mb.bin - 
+
++ Response 200 (application/json)
+
+        {
+            "msg": "OK",
+            "server_time": "2021-10-24 11:07:29",
+            "status": 200,
+            "result":{"filecode":"swcn8cyvm75d"}}
+               
+        
+        
+# Group File
+
+## File Info [/api/file/info]
+
+### Get info/check file(s) [GET /api/file/info?key={key}&file_code={file_code}]
+
++ Parameters
+    + key: 1l5ftrilhllgwx2bo (string) - API key
+    + file_code: gi4o0tlro01u,gi4o0tlro012 (string) - file code, or list separated by comma
+
++ Response 200 (application/json)
+
+        {
+            "msg":"OK",
+            "server_time":"2017-08-11 04:28:53",
+            "status":200,
+            "result":[
+                        {
+                            "status":200,
+                            "filecode":"gi4o0tlro01u",
+                            "name":"file-name.zip",
+                            "download":"0",
+                            "size":"200",
+                            "uploaded":"2017-08-10 05:07:17"
+                        },
+                        {
+                            "status":404,
+                            "filecode":"gi4o0tlro012"
+                        }
+                    ]
+        }
+        
+## File List [/api/file/list]
+
+### Get files list [GET /api/file/list{?key,page,per_page,fld_id,public,created,name}]
+
++ Parameters
+    + key: 1l5ftrilhllgwx2bo (string) - API key
+    + page: 2 (optional,number) - page number
+    + per_page: 20 (optional,number) - number of results per page
+    + fld_id: 15 (optional,number) - folder id
+    + public: 1 (optional,number) - show public (1) or private (0) files only
+    + created: `2018-06-21 05:07:10` (optional,string) - show only files uploaded after timestamp. Specify number to show only files uploaded X minutes ago.
+    + name: `Iron man` (optional,string) - filter file names
+
++ Response 200 (application/json)
+
+        {
+            "msg":"OK",
+            "server_time":"2017-08-11 04:28:53",
+            "status":200,
+            "result":[
+                        {
+                            "status":200,
+                            "filecode":"gi4o0tlro01u",
+                            "name":"file-name.zip",
+                            "downloads":"0",
+                            "size":"20",
+                            "uploaded":"2017-08-10 05:07:17"
+                        },
+                        {
+                            "status":404,
+                            "filecode":"gi4o0tlro012"
+                        }
+                    ]
+        }
+        
+## File Rename [/api/file/rename]
+
+### Get info/check file(s) [GET /api/file/rename?key={key}&file_code={file_code}&name={name}]
+
++ Parameters
+    + key: 1l5ftrilhllgwx2bo (string) - API key
+    + file_code: gi4o0tlro01u,gi4o0tlro012 (string) - file code, or list separated by comma
+    + name: cool_video.mp4 (string) - new file name
+
++ Response 200 (application/json)
+
+        {
+            "msg":"OK",
+            "server_time":"2017-08-11 04:28:53",
+            "status":200,
+            "result":[
+                        {
+                            "status":200,
+                            "filecode":"gi4o0tlro01u",
+                            "name":"file-name.zip",
+                            "canplay":1,
+                            "views_started":"1",
+                            "downloads":"0",
+                            "size":"201",
+                            "uploaded":"2017-08-10 05:07:17"
+                        },
+                        {
+                            "status":404,
+                            "filecode":"gi4o0tlro012"
+                        }
+                    ]
+        }
+        
+## File Clone [/api/file/clone]
+
+### Clone file [GET /api/file/clone?key={key}&file_code={file_code}]
+
++ Parameters
+    + key: 1l5ftrilhllgwx2bo (string) - API key
+    + file_code: gi4o0tlro01u,gi4o0tlro012 (string) - file code
+
++ Response 200 (application/json)
+
+        {
+            "msg":"OK",
+            "server_time":"2017-08-11 04:28:53",
+            "status":200,
+            "result":
+            {
+                "filecode":"gtl2mhgw4is7",
+                "url":"https://send.cm/gtl2mhgw4is7"
+            }
+        }
+
+
+
+## File Set Folder [/api/file/set_folder]
+
+### Set file(s) folder [GET /api/file/set_folder?key={key}&file_code={file_code}&fld_id={fld_id}]
+
++ Parameters
+    + key: 1l5ftrilhllgwx2bo (string) - API key
+    + file_code: gi4o0tlro01u,gi4o0tlro012 (string) - file code, or list separated by comma
+    + fld_id: 15 (number) - folder id
+
++ Response 200 (application/json)
+
+        {
+            "msg":"OK",
+            "server_time":"2017-08-11 04:28:53",
+            "status":200
+        }
+
+# Group Folder
+
+## Folder List [/api/folder/list]
+
+### Get folder/file list [GET /api/folder/list?key={key}&fld_id={fld_id}]
+
++ Parameters
+    + key: 1l5ftrilhllgwx2bo (string) - API key
+    + fld_id: 15 (optional,number) - folder id
+
++ Response 200 (application/json)
+
+        {
+            "msg":"OK",
+            "server_time":"2017-08-11 04:28:53",
+            "status":200,
+            "result":
+            {
+                    "folders":
+                    [
+                            {
+                                "name":"Sub1",
+                                "fld_id":"24"
+                            }
+                    ],
+                    "files":
+                    [
+                            {
+                                "link":"https://send.cm/4w0sy8e63f0c",
+                                "uploaded":"2017-07-18 04:06:39",
+                                "file_code":"4w0sy8e63f0c",
+                                "fld_id":"16",
+                                "name":"100mb.bin",
+                                
+                            }
+                    ]
+            }
+        }
+        
+## Create Folder [/api/folder/create]
+
+### Create new folder [GET /api/folder/create?key={key}&parent_id={parent_id}&name={name}]
+
++ Parameters
+    + key: 1l5ftrilhllgwx2bo (string) - API key
+    + parent_id: 15 (optional,number) - parent folder id
+    + name: New Folder (string) - folder name
+
++ Response 200 (application/json)
+
+        {
+            "msg": "OK",
+            "server_time": "2017-08-11 04:28:53",
+            "status": 200,
+            "result":
+            {
+                "fld_id": "26"
+            }
+        }
+        
+## Rename Folder [/api/folder/rename]
+
+### Rename folder [GET /api/folder/rename?key={key}&fld_id={fld_id}&name={name}]
+
++ Parameters
+    + key: 1l5ftrilhllgwx2bo (string) - API key
+    + fld_id: 15 (number) - folder id
+    + name: New Folder (string) - folder name
+
++ Response 200 (application/json)
+
+        {
+            "msg": "OK",
+            "server_time": "2017-08-11 04:28:53",
+            "status": 200,
+            "result": "true"
+        }
+
+# Group Files
+
+## Deleted Files [/api/files/deleted]
+
+### Get last files deleted [GET /api/files/deleted?key={key}&last={last}]
+
++ Parameters
+    + key: 1l5ftrilhllgwx2bo (string) - API key
+    + last: 20 (optional,number) - number of files limit
+
++ Response 200 (application/json)
+
+        {
+            "msg":"OK",
+            "server_time":"2017-08-11 04:28:53",
+            "status":200,
+            "result":
+            [
+                {
+                    "file_code":"gtl2mhgw4is7",
+                    "name":"1mb.bin",
+                    "deleted":"2017-08-11 20:00:01",
+                    "deleted_ago_sec":"194316"
+                },
+                {
+                    "file_code":"uoyagho8c707",
+                    "name":"2mb.bin",
+                    "deleted":"2017-08-10 20:30:02"
+                    "deleted_ago_sec":"278915"
+                }
+            ]
+        }
+        
+## DMCA Files [/api/files/dmca]
+    
+### Get files scheduled for DMCA delete [GET /api/files/dmca?key={key}&last={last}]
+
++ Parameters
+    + key: 1l5ftrilhllgwx2bo (string) - API key
+    + last: 20 (optional,number) - number of files limit
+
++ Response 200 (application/json)
+
+        {
+            "msg":"OK",
+            "server_time":"2017-08-11 04:28:53",
+            "status":200,
+            "result":
+            [
+                {
+                    "name": "1mb.bin",
+                    "file_code":"gtl2mhgw4is7",
+                    "del_time":"2017-08-11 16:31:53"
+                },
+                {
+                    "name": "2mb.bin",
+                    "file_code":"uoyagho8c707",
+                    "del_time":"2017-08-11 16:30:23"
+                }
+            ]
+        }
+            
