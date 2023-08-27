@@ -9,19 +9,22 @@ Installation
 ------------
 
 To use the `SendCM` API wrapper, you need to have the `requests` library installed. You can install it using the following command:
-
-    pip install requests
+```py
+    pip install sendcm
+```
 
 Usage
 -----
 
 1.  Import the required module and create a `SendCM` instance by providing your Send.cm API key:
 
+    ```py
     import requests
     from sendcm_api_wrapper import SendCM
     
     api_key = "your-api-key"
     sendcm = SendCM(api_key)
+    ```
     
 
 ### Account Information
