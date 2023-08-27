@@ -10,7 +10,7 @@ setup(
     install_requires=[
         'requests',
     ],
-    url='https://github.com/immodded/sendcm',
+    url='https://github.com/immodded/send-cm',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
