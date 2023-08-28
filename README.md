@@ -20,7 +20,7 @@ Usage
 
     ```py
     import requests
-    from sendcm_api_wrapper import SendCM
+    from sendcm import SendCM
     
     api_key = "your-api-key"
     sendcm = SendCM(api_key)
